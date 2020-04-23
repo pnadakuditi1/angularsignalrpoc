@@ -1,0 +1,22 @@
+<body class="site" fxLayout="column">
+  <header fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <img class="logo" src="../assets/images/logo.png" title="iPrattle" />
+      <h2 class="siteTitle">iPrattle Web</h2>
+    </div>
+    <div class="headerNav" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="token">
+      <div>Welcome {{token.name}}!</div>
+      <mat-icon (click)="logout()" style="cursor: pointer;" color="warn">exit_to_app</mat-icon>
+    </div>
+  </header>
+  
+  <main class="siteContent">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer fxLayout="row" fxHide.lt-sm="true" fxLayoutAlign="center none">
+    ©iPrattle 2020
+  </footer>
+
+</body>

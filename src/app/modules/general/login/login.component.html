@@ -1,0 +1,28 @@
+<div fxFlexFill fxLayoutAlign="center center" class="divLoginPage">
+    <mat-card fxFlex="25" fxLayout="column" fxLayoutAlign="stretch">
+        <mat-toolbar color="primary">Login</mat-toolbar>
+        <form fxLayout="column" class="formLogin" [formGroup]="fgLogin" (ngSubmit)="login()">
+            <mat-label *ngIf="isRegistered" class="successMessage">
+                Registration successful, please login.
+            </mat-label>
+            <mat-label *ngIf="loginError" class="errorMessage">
+                Invalid Username or Password. Please check and try again.
+            </mat-label>
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" type="password" formControlName="password">
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center" >
+                <a  [routerLink]="['/register']">Create Account</a>
+                <button mat-raised-button type="submit" color="accent">Login</button>
+            </div>
+            
+        </form>
+    </mat-card>
+</div>

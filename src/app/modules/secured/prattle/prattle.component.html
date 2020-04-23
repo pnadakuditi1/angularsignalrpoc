@@ -1,0 +1,54 @@
+<div fxFlexFill fxLayout="row" fxLayoutAlign="start stretch" style="margin: 10px;">
+    <div fxFlex="1 1 20%" class="section" fxLayoutAlign="column" fxLayoutAlign="start stretch">
+        <div fxLayout="column" fxFlexFill fxLayoutAlign="start stretch" style="width: 100%">
+            <div class="header" fxLayout="row" fxLayoutAlign="space-between start">
+                <div fxFlex="1 1 75%"> 
+                    <div style="padding-top: 10px;" >{{ contactsTitle }}</div>
+                </div> 
+                <div fxFlex="1 1 25%"> 
+                    <button mat-raised-button class="custom" type="button" color="accent" (click)="addContact()">
+                        <mat-icon color="primary">add</mat-icon>
+                    </button>
+                </div> 
+            </div>
+            <div>
+                <app-contacts [contacts]="contacts" (onContactClicked)="onContactSelected($event)" >
+                </app-contacts>                
+            </div>
+        </div>
+    </div>
+    <div fxFlex="1 1 80%" class="section" fxLayoutAlign="row">
+        <div fxLayout="column" fxFlexFill fxLayoutAlign="start stretch" style="width: 100%; padding: 10px">
+            <div fxFlex="1 1 4%" class="header" style="border-bottom: none;">
+                <div style="margin-bottom: 5px;"> Messages </div>
+            </div>
+            <div fxFlexOffset="1" fxFlex class="messagesContainer">
+                <mat-list-item *ngFor="let msg of messages" class="listItem">
+                    <div [ngClass]="msg.senderId == userId ? 'sent' : 'received'">
+                        <div mat-line style="padding-top: 5px" class="color"> 
+                            {{ msg.body }} 
+                        </div>
+                        <div style="font-size: 12px;">
+                            {{msg.createdOn | date:'medium'}}
+                        </div>
+                    </div>
+                </mat-list-item>
+            </div>
+            <div fxFlexOffset="1">
+                <form fxLayout="row" fxLayoutAlign="space-between center" #formDirective="ngForm" 
+                        [formGroup]="fgSendMessage" novalidate 
+                        (submit)="sendMessage(formDirective)" >
+                    <mat-form-field class="fullWidth" appearance="outline" fxFlex>
+                        <mat-label>Message</mat-label>
+                        <textarea matInput placeholder="Type your message here" 
+                            formControlName="newMessage"></textarea>
+                    </mat-form-field>
+                    <button style="margin-left: 10px;" mat-raised-button class="custom" 
+                        type="submit" color="accent" [disabled]="!selectedContact">
+                        <mat-icon color="primary">send</mat-icon>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

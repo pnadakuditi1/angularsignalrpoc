@@ -1,0 +1,21 @@
+.contactsList {
+    margin: 3px;
+    padding: 3px;
+    width: 100%;
+
+    mat-list {
+        width: 100%;
+    }
+
+    .listItem {
+        height: 36px;
+    }
+}
+
+.mat-list-base.custom {
+    padding-top: 0px;;
+}
+
+.selected {
+    background-color: lightgreen;
+}

@@ -1,0 +1,14 @@
+<div fxLayoutAlign="start stretch" style="border: none" class="contactsList">
+    <mat-list class="custom">
+        <mat-list-item *ngFor="let contact of contacts" class="listItem" (click)="onContactSelected(contact)">
+            <div fxFlex fxLayout="row" [ngClass]="contact.selected ? 'selected' : 'notSelected'">
+                <mat-icon mat-list-icon>contacts</mat-icon>
+                <div mat-line style="padding-top: 5px"> {{ contact.name }} </div>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-list-item>
+        <div *ngIf="contacts == null || contacts.length == 0">
+            No Contacts found.
+        </div>
+    </mat-list>
+</div>

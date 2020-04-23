@@ -1,0 +1,42 @@
+<mat-card fxLayout="column" fxFlexFill fxLayoutAlign="start stretch">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" 
+        style="width: 100%; padding-bottom: 10px;border-bottom: 1px solid lightgray;">
+        <div class="sectionHeader">
+            Add Contact
+        </div>
+        <button type="button" (click)="closeDialog()" style="cursor: pointer;">
+            <mat-icon color="warn">cancel</mat-icon>
+        </button>
+    </div>
+
+    <div class="instructions" *ngIf='contacts != null && contacts.length > 0'>
+        Find the contact by typing in the full name.
+    </div>
+
+    <div class="instructions" *ngIf='contacts == null || contacts.length == 0'>
+        You got'em all. No other contacts exist.
+    </div>
+
+    <form class="formAddContact" [formGroup]="fgAddContact" (ngSubmit)="addContact()" 
+        *ngIf='contacts != null && contacts.length > 0'>
+        <mat-label *ngIf="errorMessage" class="errorMessage">
+            {{ errorMessage }}
+        </mat-label>
+
+        <mat-form-field class="formControl-full-width">
+            <input type="text"
+                    placeholder="Contact's full name"
+                    matInput
+                    formControlName="selectContact"
+                    [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let contact of contacts" [value]="contact.name" (click)="onOptionClicked(contact)">
+                    {{ contact.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="accent">Add Contact</button>
+    </form>
+
+</mat-card>
